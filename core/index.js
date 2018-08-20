@@ -1,14 +1,17 @@
 const net = require('net')
-const {port, localhost} = require('./config')
+const {defaultPort, localhost} = require('./config')
 const {addPeerConnection} = require('./peers')
 
 // Spread boot nodes from process arguments
 const [_, root, ...bootNodes] = process.argv
 
 // Connect to all boot nodes
-for(host of bootNodes){
-  // Create connection to boot node on config port
-  const connection = net.createConnection({ port, host })
+for(ip of bootNodes){
+  // Spread host & port from ip
+  const [host, port = defaultPort] = ip.split(':')
+
+  // Create connection to boot node
+  const connection = net.createConnection({ port, host }) 
 
   // Add new connections as new peer
   addPeerConnection(connection)
@@ -18,5 +21,5 @@ for(host of bootNodes){
 // Add new connections as new peer
 const server = net.createServer(addPeerConnection)
 
-// Server to listen on config port
-server.listen(port, localhost)
+// Server to listen on config defaultPort
+server.listen(defaultPort, localhost)
