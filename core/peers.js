@@ -3,12 +3,9 @@ const {addPeerMessage} = require('./messages')
 
 const peers = {}
 
-const broadcastToAllPeers = (sender, message) => {
+const broadcastToAllPeers = (message) => {
   // Broadcast message to all peers
   for(peer of Object.values(peers)){
-    // Exclude sender peer
-    if(peer === sender) return
-
     // Write buffer to peers
     peer.write(message)
   }
@@ -29,7 +26,7 @@ const addPeerConnection = (connection) => {
     // Check if message was added
     if(messageWasAdded){
       // Broadcast message to all peers
-      broadcastToAllPeers(connection, bufferAsString)
+      broadcastToAllPeers(bufferAsString)
     }
   })
 
