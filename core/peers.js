@@ -24,10 +24,13 @@ const addPeerConnection = (connection) => {
     const bufferAsString = data.toString()
 
     // Add message to messages collection
-    addPeerMessage(bufferAsString)
+    const messageWasAdded = addPeerMessage(bufferAsString)
 
-    // Broadcast message to all peers
-    broadcastToAllPeers(connection, bufferAsString)
+    // Check if message was added
+    if(messageWasAdded){
+      // Broadcast message to all peers
+      broadcastToAllPeers(connection, bufferAsString)
+    }
   })
 
   // Remove peer on end of connection
