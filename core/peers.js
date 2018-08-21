@@ -35,6 +35,11 @@ const addPeerConnection = (connection) => {
     delete peers[id]
   })
 
+  // Log all caught errors
+  connection.on('error', (err) => {
+    console.log(err)
+  })
+
   // Add connection as a new peer
   peers[id] = connection
 }
