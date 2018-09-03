@@ -1,8 +1,6 @@
 const SHA256 = require('crypto-js/sha256')
 
-const messages = {}
-
-const addPeerMessage = (message) => {
+const addPeerMessage = (messages = {}) => (message) => {
   // Generate message id from hash of message content
   const id = SHA256(message).toString()
 
@@ -13,9 +11,14 @@ const addPeerMessage = (message) => {
   console.log(id, message)
 
   // Add message to messages collection
-  return messages[id] = message
+  messages = {
+    ...messages,
+    [id]: message
+  }
+
+  return true
 }
 
 module.exports = {
-  addPeerMessage
+  addPeerMessage: addPeerMessage()
 }

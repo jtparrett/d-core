@@ -1,9 +1,7 @@
 const uuid = require('uuid/v1')
 const {addPeerMessage} = require('./messages')
 
-const peers = {}
-
-const broadcastToAllPeers = (message) => {
+const broadcastToAllPeers = (peers, message) => {
   // Broadcast message to all peers
   for(peer of Object.values(peers)){
     // Write buffer to peers
@@ -11,9 +9,12 @@ const broadcastToAllPeers = (message) => {
   }
 }
 
-const addPeerConnection = (connection) => {
+const addPeerConnection = (peers = {}) => (connection) => {
   // Generate timestamp based id
   const id = uuid()
+
+  // Log new peer
+  console.log('New Peer Connection', id)
 
   // Listen for messages from connection
   connection.on('data', (data) => {
@@ -26,13 +27,14 @@ const addPeerConnection = (connection) => {
     // Check if message was added
     if(messageWasAdded){
       // Broadcast message to all peers
-      broadcastToAllPeers(bufferAsString)
+      broadcastToAllPeers(peers, bufferAsString)
     }
   })
 
   // Remove peer on end of connection
   connection.on('end', () => {
-    delete peers[id]
+    const {[id]: removedPeer, ...rest} = peers
+    peers = rest
   })
 
   // Log all caught errors
@@ -41,10 +43,13 @@ const addPeerConnection = (connection) => {
   })
 
   // Add connection as a new peer
-  peers[id] = connection
+  peers = {
+    ...peers,
+    [id]: connection
+  }
 }
 
 module.exports = {
-  addPeerConnection,
+  addPeerConnection: addPeerConnection(),
   broadcastToAllPeers
 }
