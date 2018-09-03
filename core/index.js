@@ -25,3 +25,8 @@ const server = net.createServer(addPeerConnection)
 
 // Server to listen on config defaultPort
 server.listen(defaultPort, localhost)
+
+// Close server on application exit
+process.on('exit', () => {
+  server.close()
+})
