@@ -13,8 +13,8 @@ const addPeerConnection = (peers = {}) => (connection) => {
   // Generate timestamp based id
   const id = uuid()
 
-  // Log new peer
-  console.log('New Peer Connection', id)
+  // Log new peer on connection
+  console.log('New Peer:', id)
 
   // Listen for messages from connection
   connection.on('data', (data) => {
@@ -39,7 +39,7 @@ const addPeerConnection = (peers = {}) => (connection) => {
 
   // Log all caught errors
   connection.on('error', (err) => {
-    console.log(err)
+    console.error('Peer ERROR:', id, err.code)
   })
 
   // Add connection as a new peer

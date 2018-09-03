@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const net = require('net')
-const {defaultPort, localhost} = require('./config')
+const {defaultPort} = require('./config')
 const {addPeerConnection} = require('./peers')
 
 // Spread boot nodes from process arguments
@@ -24,7 +24,7 @@ for(ip of bootNodes){
 const server = net.createServer(addPeerConnection)
 
 // Server to listen on config defaultPort
-server.listen(defaultPort, localhost)
+server.listen(defaultPort)
 
 // Close server on application exit
 process.on('exit', () => {
