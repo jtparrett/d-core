@@ -1,3 +1,3 @@
-# d-core
+# Peercast Core
 
 A NodeJS decentralized network

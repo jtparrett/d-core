@@ -1,19 +1,19 @@
 {
-  "name": "d-core",
+  "name": "peercast-core",
   "version": "1.0.0",
   "description": "A NodeJS decentralized network",
   "main": "index.js",
   "license": "MIT",
   "bin": {
-    "d-core": "./core/index.js"
+    "peercast-core": "./core/index.js"
   },
   "scripts": {
     "start": "node core"
   },
-  "homepage": "https://github.com/jtparrett/d-core#readme",
+  "homepage": "https://github.com/jtparrett/peercast-core#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jtparrett/d-core.git"
+    "url": "git+https://github.com/jtparrett/peercast-core.git"
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
