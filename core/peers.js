@@ -31,15 +31,21 @@ const addPeerConnection = (peers = {}) => (connection) => {
     }
   })
 
-  // Remove peer on end of connection
-  connection.on('end', () => {
+  const removePeer = () => {
     const {[id]: removedPeer, ...rest} = peers
     peers = rest
-  })
+    console.log('Peer Disconnected:', id)
+  }
+
+  // Remove peer on end of connection
+  connection.on('end', removePeer)
+
+  connection.on('close', removePeer)
 
   // Log all caught errors
   connection.on('error', (err) => {
     console.error('Peer ERROR:', id, err.code)
+    removePeer()
   })
 
   // Add connection as a new peer
