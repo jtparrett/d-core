@@ -1,8 +1,20 @@
 {
   "name": "d-core",
   "version": "1.0.0",
+  "description": "A NodeJS decentralized network",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "d-core": "./core/index.js"
+  },
+  "scripts": {
+    "start": "node core"
+  },
+  "homepage": "https://github.com/jtparrett/d-core#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtparrett/d-core.git"
+  },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "uuid": "^3.3.2"
