@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const net = require('net')
 const {defaultPort, localhost} = require('./config')
 const {addPeerConnection} = require('./peers')
