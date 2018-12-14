@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const net = require('net')
-const {defaultPort} = require('./config')
+const {defaultPort} = require('../config')
 const {addPeerConnection} = require('./peers')
 
 // Spread boot nodes from process arguments
