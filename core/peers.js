@@ -40,6 +40,7 @@ const addPeerConnection = (peers = {}) => (connection) => {
   // Remove peer on end of connection
   connection.on('end', removePeer)
 
+  // Remove peer on close of connection
   connection.on('close', removePeer)
 
   // Log all caught errors
